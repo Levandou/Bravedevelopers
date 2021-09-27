@@ -6,7 +6,7 @@ import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
 @Entity(tableName = "name_list")
-class InformationAboutPokemon (
+data class InformationAboutPokemon (
     @SerializedName("id")
     @Expose
     val id: Int? = null,

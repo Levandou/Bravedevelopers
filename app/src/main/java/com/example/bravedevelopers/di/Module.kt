@@ -1,6 +1,10 @@
 package com.example.bravedevelopers.di
 
+import android.app.Application
+import android.content.Context
 import com.example.bravedevelopers.api.ApiService
+import com.example.bravedevelopers.data.AppDatabase
+import com.example.bravedevelopers.data.PokemonsDao
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
@@ -10,7 +14,7 @@ import javax.inject.Singleton
 
 
 @Module
-class Module(/*val application: Application*/)
+class Module(val application: Application)
 
 {
     val baseURL = "https://pokeapi.co/api/v2/"
@@ -32,10 +36,7 @@ class Module(/*val application: Application*/)
 
 
 
-/*@Module
-public class DatabaseModule(val application: Application) {*/
-
-  /*  @Singleton
+    @Singleton
     @Provides
     fun getDao(appDatabase: AppDatabase): PokemonsDao {
         return appDatabase.resultDao()
@@ -52,5 +53,5 @@ public class DatabaseModule(val application: Application) {*/
     fun provideAppContext(): Context {
         return application.applicationContext
     }
-*/
+
 }

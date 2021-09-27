@@ -3,7 +3,7 @@ package com.example.bravedevelopers.domain
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-class Result (
+data class Result (
     //  @PrimaryKey
     @SerializedName("name")
     @Expose

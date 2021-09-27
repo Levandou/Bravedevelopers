@@ -14,7 +14,6 @@ interface ApiService {
     fun getPokemons(
         @Query(QUERY_PARAM_LIMIT) limit :Int=20,
         @Query(QUERY_PARAM_OFFSET) offset :Int=0
-
     ): Single<Pokemons>
     @GET()
     fun getInformationAboutPokemon(

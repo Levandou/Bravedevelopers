@@ -1,13 +1,12 @@
-package com.example.bravedevelopers
+package com.example.bravedevelopers.presentation
 
-import androidx.appcompat.app.AppCompatActivity
+
 import android.os.Bundle
 import android.util.Log
-import com.example.bravedevelopers.api.ApiFactory
+import androidx.appcompat.app.AppCompatActivity
+import com.example.bravedevelopers.R
 import com.example.bravedevelopers.api.ApiService
-
-
-import dagger.internal.DaggerCollections
+import com.example.bravedevelopers.appComponent
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import retrofit2.Retrofit
@@ -25,17 +24,19 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         appComponent.inject(this)
+
          val disposable=apiService.getPokemons()
         .subscribeOn(Schedulers.io())
         .subscribe({
             Log.d("zxcvb", it.toString())
         },{
             Log.d("ASDFG", it.message.toString())
-
-        }
-        )
+        })
         compositeDisposable.add(disposable)
-        compositeDisposable.dispose()
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        compositeDisposable.dispose()
+    }
 }
