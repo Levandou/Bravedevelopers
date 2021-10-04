@@ -1,21 +1,8 @@
 package com.example.bravedevelopers
 
 import android.app.Application
-import com.example.bravedevelopers.di.AppComponent
-import com.example.bravedevelopers.di.DaggerAppComponent
+import dagger.hilt.android.HiltAndroidApp
 
-lateinit var appComponent: AppComponent
+@HiltAndroidApp
 class App:Application() {
-
-    override fun onCreate() {
-        super.onCreate()
-
-      appComponent = DaggerAppComponent
-                .builder()
-                .build()
-
-    }
-
-
-
 }

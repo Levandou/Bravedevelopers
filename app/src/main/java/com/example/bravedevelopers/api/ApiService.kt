@@ -17,7 +17,7 @@ interface ApiService {
     ): Single<Pokemons>
     @GET()
     fun getInformationAboutPokemon(
-        @Url()url:String
+            @Url() url: String?
     ): Single<InformationAboutPokemon>
 
     fun getNumber(number: String):String  {return number}

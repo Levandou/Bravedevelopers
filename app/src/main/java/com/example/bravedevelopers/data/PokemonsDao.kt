@@ -7,12 +7,8 @@ import com.example.bravedevelopers.domain.InformationAboutPokemon
 
 @Dao
 interface PokemonsDao {
-/*@Query("SELECT * FROM name_list ORDER BY name ")
-    fun getNameList():LiveData< List <InformationAboutPokemon> >
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertNames(resultList: InformationAboutPokemon)
-  */
-
+@Query("SELECT * FROM name_list  ORDER BY name ")
+    fun getNameList(): List <InformationAboutPokemon>
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertFavorite(informationAboutPokemon: InformationAboutPokemon)
     @Delete

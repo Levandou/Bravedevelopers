@@ -1,20 +1,25 @@
 package com.example.bravedevelopers.di
 
+
 import android.app.Application
-import android.content.Context
+import androidx.room.Room
 import com.example.bravedevelopers.api.ApiService
 import com.example.bravedevelopers.data.AppDatabase
 import com.example.bravedevelopers.data.PokemonsDao
+import com.example.bravedevelopers.data.RepositoryImpl
+import com.example.bravedevelopers.domain.useCase.Repository
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
-
+@InstallIn(SingletonComponent::class)
 @Module
-class Module(val application: Application)
+class Module(/*val application: Application*/)
 
 {
     val baseURL = "https://pokeapi.co/api/v2/"
@@ -44,14 +49,21 @@ class Module(val application: Application)
 
     @Singleton
     @Provides
-    fun getRoomDbInstance(): AppDatabase {
-        return AppDatabase.getInstance(provideAppContext())
+    fun getRoomDbInstance(application: Application): AppDatabase {
+        return Room.databaseBuilder(
+            application,
+            AppDatabase::class.java,
+            AppDatabase.DB_NAME
+        ).allowMainThreadQueries().build()
     }
+
+
 
     @Singleton
     @Provides
-    fun provideAppContext(): Context {
-        return application.applicationContext
+    fun provideRepository(pokemonsDao: PokemonsDao,apiService: ApiService):Repository{
+        return RepositoryImpl(pokemonsDao,apiService)
     }
+
 
 }
