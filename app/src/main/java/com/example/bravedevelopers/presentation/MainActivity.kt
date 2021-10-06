@@ -5,72 +5,34 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModel
+import androidx.recyclerview.widget.RecyclerView
 import com.example.bravedevelopers.R
-import com.example.bravedevelopers.api.ApiService
-import com.example.bravedevelopers.data.AppDatabase
 import com.example.bravedevelopers.domain.InformationAboutPokemon
+import com.example.bravedevelopers.presentation.firstScreen.MainViewModel
+import com.example.bravedevelopers.presentation.firstScreen.PokemonsListAdapter
 import dagger.hilt.android.AndroidEntryPoint
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
-import retrofit2.Retrofit
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
-
-private val mainViewModel:MainViewModel by viewModels()
-
-
-
-    @Inject
-    lateinit var apiService: ApiService
-    lateinit var retrofit: Retrofit
-    private val compositeDisposable= CompositeDisposable()
-
-
-
-
-
-
-
-
+    private val mainViewModel: MainViewModel by viewModels()
+    private lateinit var adapter: PokemonsListAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-
-           mainViewModel.favoritesList.observe(this, {
-
-        Log.d("qwertyu", it.toString())
-
-
-    })
-
-
+    /*    setupRecyclerView()
+         var list:MutableList<InformationAboutPokemon> = mutableListOf()
         mainViewModel.pokemonsList.observe(this ,{
+            list.add(it[0])
+            adapter.pokemonsList=list
             Log.d("zxcvb", it.toString())
         })
-        Log.d("asdf", null.toString())
-
-
-    }
-/*
-         val disposable=apiService.getPokemons()
-        .subscribeOn(Schedulers.io())
-        .subscribe({
-            Log.d("zxcvb", it.toString())
-        },{
-            Log.d("ASDFG", it.message.toString())
-        })
-        compositeDisposable.add(disposable)
+*/
     }
 
-   override fun onDestroy() {
-        super.onDestroy()
-        compositeDisposable.dispose()
-
+ /*   private fun setupRecyclerView(){
+        val rvPokemonsList=findViewById<RecyclerView>(R.id.rv_pokemon_list)
+        adapter= PokemonsListAdapter()
+        rvPokemonsList.adapter=adapter
     }*/
-
 }

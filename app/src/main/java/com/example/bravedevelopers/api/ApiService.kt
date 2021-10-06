@@ -20,8 +20,7 @@ interface ApiService {
             @Url() url: String?
     ): Single<InformationAboutPokemon>
 
-    fun getNumber(number: String):String  {return number}
-    fun getOffset(): String {return QUERY_PARAM_OFFSET}
+
 
     companion object{
         const val QUERY_PARAM_ID="id"

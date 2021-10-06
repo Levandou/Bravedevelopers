@@ -9,9 +9,17 @@ import com.example.bravedevelopers.domain.InformationAboutPokemon
 interface PokemonsDao {
 @Query("SELECT * FROM name_list  ORDER BY name ")
     fun getNameList(): List <InformationAboutPokemon>
+
+  /*  @Query("SELECT * FROM name_list WHERE name=")
+    fun getNameList1(): List <InformationAboutPokemon>*/
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertFavorite(informationAboutPokemon: InformationAboutPokemon)
+    fun insertFavorite(informationAboutPokemon: InformationAboutPokemon){
+        informationAboutPokemon.isFavorite=true
+    }
     @Delete
-    fun deleteFavorite(informationAboutPokemon: InformationAboutPokemon)
+    fun deleteFavorite(informationAboutPokemon: InformationAboutPokemon){
+        informationAboutPokemon.isFavorite=false
+    }
 
 }

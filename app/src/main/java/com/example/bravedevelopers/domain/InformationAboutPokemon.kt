@@ -26,4 +26,6 @@ data class InformationAboutPokemon (
 
     @SerializedName("weight")
     @Expose
-    val weight: Int? = null)
+    val weight: Int? = null,
+
+    var isFavorite: Boolean=false)
