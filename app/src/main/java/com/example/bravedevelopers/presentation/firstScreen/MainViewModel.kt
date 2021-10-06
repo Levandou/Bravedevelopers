@@ -12,42 +12,45 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class MainViewModel @Inject constructor(private val deleteFromFavoritesUseCase: DeleteFromFavoritesUseCase,private val addToFavoritesUseCase: AddToFavoritesUseCase,private val getPokemonsListUseCase: GetPokemonsListUseCase): ViewModel()  {
+class MainViewModel @Inject constructor(
+    private val deleteFromFavoritesUseCase: DeleteFromFavoritesUseCase,
+    private val addToFavoritesUseCase: AddToFavoritesUseCase,
+    private val getPokemonsListUseCase: GetPokemonsListUseCase
+) : ViewModel() {
 
-   // val favoritesList =MutableLiveData<List<InformationAboutPokemon>>()
-    val pokemonsList:MutableLiveData<List<InformationAboutPokemon>> =MutableLiveData()
-    var url:String="https://pokeapi.co/api/v2/pokemon/"
-    val offsetAndOffsetPlusLimit=1..20
-var list:MutableList<InformationAboutPokemon> = mutableListOf()
+    // val favoritesList =MutableLiveData<List<InformationAboutPokemon>>()
+    val pokemonsList: MutableLiveData<List<InformationAboutPokemon>> = MutableLiveData()
+    var url: String = "https://pokeapi.co/api/v2/pokemon/"
+    val offsetAndOffsetPlusLimit = 1..20
+    var list: MutableList<InformationAboutPokemon> = mutableListOf()
+
     fun loadData2() {
         for (i in offsetAndOffsetPlusLimit) {
             getPokemonsListUseCase.urlOfPokemon("$url$i/")
             getPokemonsListUseCase.execute(onSuccess = {
                 //pokemonsList.postValue(listOf(it))//
-                pokemonsList.value= listOf(it)
-            list.add(it)
+                pokemonsList.value = listOf(it)
+                list.add(it)
                 //    addToFavoritesUseCase.addToFavorites(it)
                 Log.d("ghj", it.toString())
             }
             )
         }
-        Log.d("lkio",list.toString())
-     //   pokemonsList.postValue(list)
+        Log.d("lkio", list.toString())
+        //   pokemonsList.postValue(list)
     }
 
-
- /*   fun getFavorites(){
-        favoritesList.value= showFavoritesUseCase.showFavorites()
-    }*/
-
-
-    fun addToFavorites(informationAboutPokemon: InformationAboutPokemon){
+    /*   fun getFavorites(){
+           favoritesList.value= showFavoritesUseCase.showFavorites()
+       }*/
 
 
+    fun addToFavorites(informationAboutPokemon: InformationAboutPokemon) {
+        addToFavoritesUseCase.addToFavorites(informationAboutPokemon)
     }
 
     init {
-       // getFavorites()
+        // getFavorites()
         loadData2()
     }
 }

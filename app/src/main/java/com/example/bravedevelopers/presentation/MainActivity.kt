@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
 
  /*   private fun setupRecyclerView(){
         val rvPokemonsList=findViewById<RecyclerView>(R.id.rv_pokemon_list)
-        adapter= PokemonsListAdapter()
+        adapter= PokemonsListAdapter { mainViewModel.addToFavorites(it) }
         rvPokemonsList.adapter=adapter
     }*/
 }
