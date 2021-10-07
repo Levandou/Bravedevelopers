@@ -8,13 +8,19 @@ import com.example.bravedevelopers.domain.InformationAboutPokemon
 import com.example.bravedevelopers.domain.useCase.AddToFavoritesUseCase
 import com.example.bravedevelopers.domain.useCase.DeleteFromFavoritesUseCase
 import com.example.bravedevelopers.domain.useCase.GetPokemonsListUseCase
+import com.example.bravedevelopers.domain.useCase.ShowFavoritesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class MainViewModel @Inject constructor(private val deleteFromFavoritesUseCase: DeleteFromFavoritesUseCase,private val addToFavoritesUseCase: AddToFavoritesUseCase,private val getPokemonsListUseCase: GetPokemonsListUseCase): ViewModel()  {
+class MainViewModel @Inject constructor(
+    private val deleteFromFavoritesUseCase: DeleteFromFavoritesUseCase,
+    private val addToFavoritesUseCase: AddToFavoritesUseCase,
+    private val getPokemonsListUseCase: GetPokemonsListUseCase,
+    private val showFavoritesUseCase: ShowFavoritesUseCase
+): ViewModel()  {
 
-   // val favoritesList =MutableLiveData<List<InformationAboutPokemon>>()
+   val favoritesList =MutableLiveData<List<InformationAboutPokemon>>()
     val pokemonsList:MutableLiveData<List<InformationAboutPokemon>> =MutableLiveData()
     var url:String="https://pokeapi.co/api/v2/pokemon/"
     val offsetAndOffsetPlusLimit=1..20
@@ -35,20 +41,22 @@ var list:MutableList<InformationAboutPokemon> = mutableListOf()
      //   pokemonsList.postValue(list)
     }
 
-
- /*   fun getFavorites(){
-        favoritesList.value= showFavoritesUseCase.showFavorites()
-    }*/
-
-
-    fun addToFavorites(informationAboutPokemon: InformationAboutPokemon){
-
+    fun showFavoritesList(){
+        favoritesList.postValue(showFavoritesUseCase.showFavorites())
 
     }
 
+    fun deleteFromFavorites(informationAboutPokemon: InformationAboutPokemon) {
+        deleteFromFavoritesUseCase.deleteFromFavorites(informationAboutPokemon)
+    }
+
+    fun addToFavorites(informationAboutPokemon: InformationAboutPokemon) {
+        addToFavoritesUseCase.addToFavorites(informationAboutPokemon)
+    }
     init {
-       // getFavorites()
+
         loadData2()
+          showFavoritesList()
     }
 }
 

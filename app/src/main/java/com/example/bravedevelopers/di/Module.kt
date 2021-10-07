@@ -3,6 +3,8 @@ package com.example.bravedevelopers.di
 
 import android.app.Application
 import androidx.room.Room
+import androidx.room.migration.Migration
+import androidx.sqlite.db.SupportSQLiteDatabase
 import com.example.bravedevelopers.api.ApiService
 import com.example.bravedevelopers.data.AppDatabase
 import com.example.bravedevelopers.data.PokemonsDao
@@ -16,6 +18,7 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
+
 
 @InstallIn(SingletonComponent::class)
 @Module
@@ -50,19 +53,21 @@ class Module(/*val application: Application*/)
     @Singleton
     @Provides
     fun getRoomDbInstance(application: Application): AppDatabase {
+
+
         return Room.databaseBuilder(
             application,
             AppDatabase::class.java,
             AppDatabase.DB_NAME
-        ).allowMainThreadQueries().build()
+        )/*.addMigrations(AppDatabase.MIGRATION)*/.allowMainThreadQueries().build()
     }
 
 
 
     @Singleton
     @Provides
-    fun provideRepository(pokemonsDao: PokemonsDao,apiService: ApiService):Repository{
-        return RepositoryImpl(pokemonsDao,apiService)
+    fun provideRepository(pokemonsDao: PokemonsDao, apiService: ApiService):Repository{
+        return RepositoryImpl(pokemonsDao, apiService)
     }
 
 

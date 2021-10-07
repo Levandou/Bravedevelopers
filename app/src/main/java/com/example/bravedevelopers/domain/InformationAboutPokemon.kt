@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-@Entity(tableName = "name_list")
+@Entity(tableName = "name_list2")
 data class InformationAboutPokemon (
     @SerializedName("id")
     @Expose

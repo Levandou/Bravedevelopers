@@ -4,16 +4,12 @@ import android.os.Bundle
 import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
-import androidx.activity.viewModels
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bravedevelopers.R
 import com.example.bravedevelopers.domain.InformationAboutPokemon
-import com.example.bravedevelopers.domain.useCase.AddToFavoritesUseCase
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.item_pokemon.view.*
-import javax.inject.Inject
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
@@ -36,21 +32,17 @@ class FirstScreenFragment  : Fragment() {
         }
     }
 
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         setHasOptionsMenu(true)
         return inflater.inflate(R.layout.fragment_first_screen, container, false)
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView(view)
         observeViewModel()
-
     }
-
 
     fun observeViewModel(){
         mainViewModel.pokemonsList.observe(viewLifecycleOwner ,{
@@ -59,39 +51,26 @@ class FirstScreenFragment  : Fragment() {
             adapter.pokemonsList=list
         })
 
-
+        mainViewModel.favoritesList.observe(viewLifecycleOwner,{
+            adapter.pokemonsListFromDb=it
+            Log.d("oplm", it.toString())
+        })
     }
-
-
          fun setupRecyclerView(view: View){
         val rvPokemonsList=view.findViewById<RecyclerView>(R.id.rv_pokemon_list)
-//             rvPokemonsList.ivAddFavorites.callOnClick()
-        adapter= PokemonsListAdapter()
+             adapter= PokemonsListAdapter( {
+                 mainViewModel.addToFavorites(it)
+
+             },{
+                 mainViewModel.deleteFromFavorites(it)
+             })
+          //   adapter=PokemonsListAdapter{mainViewModel.deleteFromFavorites(it)}
         rvPokemonsList.adapter=adapter
-
     }
-
-
-    companion object {
-    /*    @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-                FirstScreenFragment().apply {
-                    arguments = Bundle().apply {
-                        putString(ARG_PARAM1, param1)
-                        putString(ARG_PARAM2, param2)
-                    }
-                }
-
-    */
-    }
-
-
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
-        menu.clear()
         inflater.inflate(R.menu.first_screen_menu,menu)
-
         val search=menu?.findItem(R.id.menu_search)
         val searcView=search.actionView as? SearchView
         searcView?.isSubmitButtonEnabled=true
@@ -120,9 +99,8 @@ class FirstScreenFragment  : Fragment() {
                 listSearch.add(i)
             }
         }
+
         adapter.pokemonsList=listSearch
+        adapter.notifyDataSetChanged()
     }
-
-
-
 }

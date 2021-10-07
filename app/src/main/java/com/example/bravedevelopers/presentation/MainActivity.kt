@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-    /*    setupRecyclerView()
+      /* setupRecyclerView()
          var list:MutableList<InformationAboutPokemon> = mutableListOf()
         mainViewModel.pokemonsList.observe(this ,{
             list.add(it[0])
@@ -29,10 +29,10 @@ class MainActivity : AppCompatActivity() {
         })
 */
     }
-
- /*   private fun setupRecyclerView(){
+/*
+    private fun setupRecyclerView(){
         val rvPokemonsList=findViewById<RecyclerView>(R.id.rv_pokemon_list)
-        adapter= PokemonsListAdapter()
+        adapter= PokemonsListAdapter{mainViewModel.addToFavorites(it)}
         rvPokemonsList.adapter=adapter
     }*/
 }
