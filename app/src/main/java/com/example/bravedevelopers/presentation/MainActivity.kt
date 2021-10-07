@@ -1,8 +1,10 @@
 package com.example.bravedevelopers.presentation
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
@@ -15,24 +17,19 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
-    private val mainViewModel: MainViewModel by viewModels()
-    private lateinit var adapter: PokemonsListAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        Thread.sleep(3000)
+        setTheme(R.style.Theme_AppCompat_DayNight_DarkActionBar)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-      /* setupRecyclerView()
-         var list:MutableList<InformationAboutPokemon> = mutableListOf()
-        mainViewModel.pokemonsList.observe(this ,{
-            list.add(it[0])
-            adapter.pokemonsList=list
-            Log.d("zxcvb", it.toString())
-        })
-*/
     }
-/*
-    private fun setupRecyclerView(){
-        val rvPokemonsList=findViewById<RecyclerView>(R.id.rv_pokemon_list)
-        adapter= PokemonsListAdapter{mainViewModel.addToFavorites(it)}
-        rvPokemonsList.adapter=adapter
-    }*/
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menu?.add(0,0,0,"Поиск покемонов")
+        menu?.add(0,1,1,"Случайный покемон")
+        menu?.add(0,2,2,"Избранные покемоны")
+
+        return super.onCreateOptionsMenu(menu)
+    }
 }

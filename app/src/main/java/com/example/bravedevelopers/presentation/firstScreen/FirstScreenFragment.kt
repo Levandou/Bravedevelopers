@@ -9,10 +9,11 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bravedevelopers.R
 import com.example.bravedevelopers.domain.InformationAboutPokemon
+import com.example.bravedevelopers.presentation.MainActivity
+import com.example.bravedevelopers.presentation.thirdScreen.ThirdScreenFragment
 import dagger.hilt.android.AndroidEntryPoint
 
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+private const val ARG_PARAM1 = "list2"
 
 @AndroidEntryPoint
 class FirstScreenFragment  : Fragment() {
@@ -21,25 +22,27 @@ class FirstScreenFragment  : Fragment() {
     private val mainViewModel: MainViewModel by viewModels()
     var list:MutableList<InformationAboutPokemon> = mutableListOf()
 
-    private var param1: String? = null
-    private var param2: String? = null
+    private var list2:MutableList<InformationAboutPokemon> = mutableListOf()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+
         }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         setHasOptionsMenu(true)
+//        Log.d("muyt", arguments?.getParcelableArrayList<InformationAboutPokemon>("pokemons")!!.toString())//      .toList() as MutableList<InformationAboutPokemon>
+  //Log.d("my",requireActivity().intent.hasExtra("asd"))
         return inflater.inflate(R.layout.fragment_first_screen, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         setupRecyclerView(view)
         observeViewModel()
     }
@@ -51,9 +54,12 @@ class FirstScreenFragment  : Fragment() {
             adapter.pokemonsList=list
         })
 
+
+
         mainViewModel.favoritesList.observe(viewLifecycleOwner,{
             adapter.pokemonsListFromDb=it
             Log.d("oplm", it.toString())
+           // adapter.pokemonsList=list
         })
     }
          fun setupRecyclerView(view: View){
@@ -64,7 +70,6 @@ class FirstScreenFragment  : Fragment() {
              },{
                  mainViewModel.deleteFromFavorites(it)
              })
-          //   adapter=PokemonsListAdapter{mainViewModel.deleteFromFavorites(it)}
         rvPokemonsList.adapter=adapter
     }
 
@@ -99,8 +104,17 @@ class FirstScreenFragment  : Fragment() {
                 listSearch.add(i)
             }
         }
-
-        adapter.pokemonsList=listSearch
         adapter.notifyDataSetChanged()
+        adapter.pokemonsList=listSearch
+
+    }
+    companion object {
+        @JvmStatic
+        fun newInstance(list2:MutableList<InformationAboutPokemon>) =
+            FirstScreenFragment().apply {
+                arguments = Bundle().apply {
+
+                }
+            }
     }
 }

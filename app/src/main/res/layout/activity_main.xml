@@ -3,10 +3,12 @@
 xmlns:app="http://schemas.android.com/apk/res-auto"
 xmlns:tools="http://schemas.android.com/tools"
 android:id="@+id/search_container"
-android:name="com.example.bravedevelopers.presentation.firstScreen.FirstScreenFragment"
+android:name="androidx.navigation.fragment.NavHostFragment"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
 tools:context=".presentation.MainActivity"
+    app:navGraph="@navigation/main_navigation"
 tools:layout="@layout/fragment_first_screen"
+    app:defaultNavHost="true"
     />
 
