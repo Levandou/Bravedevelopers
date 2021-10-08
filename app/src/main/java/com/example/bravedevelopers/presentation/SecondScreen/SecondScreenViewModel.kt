@@ -19,11 +19,14 @@ class SecondScreenViewModel @Inject constructor(
     private val showFavoritesUseCase: ShowFavoritesUseCase
 ): ViewModel() {
 
+
     val favoritesList = MutableLiveData<List<InformationAboutPokemon>>()
     val pokemonsList: MutableLiveData<List<InformationAboutPokemon>> = MutableLiveData()
     var url: String = "https://pokeapi.co/api/v2/pokemon/"
-    val offsetAndOffsetPlusLimit = 1..20
+    val offsetAndOffsetPlusLimit: IntRange = 1..20
+    var a:Int=0
     var list: MutableList<InformationAboutPokemon> = mutableListOf()
+
     fun loadData2() {
         for (i in offsetAndOffsetPlusLimit) {
             getPokemonsListUseCase.urlOfPokemon("$url$i/")

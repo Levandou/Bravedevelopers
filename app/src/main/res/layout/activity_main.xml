@@ -8,6 +8,9 @@
     android:layout_height="match_parent"
     tools:context=".presentation.MainActivity"
     app:navGraph="@navigation/main_navigation"
-    tools:layout="@layout/fragment_first_screen"
+    tools:layout="@layout/fragment_second_screen"
     app:defaultNavHost="true"
     />
+
+
+<!--    tools:layout="@layout/fragment_first_screen"-->
