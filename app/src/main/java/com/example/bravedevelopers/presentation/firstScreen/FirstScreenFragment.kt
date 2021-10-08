@@ -44,6 +44,7 @@ class FirstScreenFragment  : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setupRecyclerView(view)
+      //  activity?.let { Log.d("poiuyt",(it as MainActivity).observe().toString() )}
         observeViewModel()
     }
 
