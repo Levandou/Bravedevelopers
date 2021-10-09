@@ -8,6 +8,6 @@
     android:layout_height="match_parent"
     tools:context=".presentation.MainActivity"
     app:navGraph="@navigation/main_navigation"
-    tools:layout="@layout/fragment_third_screen"
+    tools:layout="@layout/fragment_first_screen"
     app:defaultNavHost="true"
     />
