@@ -161,13 +161,6 @@ class SecondScreenFragment : Fragment() {
             }
             Log.d("tyuj", it.toString())
 
-            /*
-                if(list.size>40){
-                    for(i in 1..20){
-                        list.removeLast()}
-                    }*/
-
-
 
         })
     }
