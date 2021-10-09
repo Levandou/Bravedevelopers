@@ -5,8 +5,10 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
+import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.Navigation
 import com.example.bravedevelopers.R
 import com.example.bravedevelopers.domain.InformationAboutPokemon
 import dagger.hilt.android.AndroidEntryPoint
@@ -33,5 +35,23 @@ class MainActivity : AppCompatActivity() {
         return super.onCreateOptionsMenu(menu)
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val navController= Navigation.findNavController(this,R.id.search_container)
+        if(item.itemId==0){
+            navController.navigate(R.id.firstScreenFragment)
+        }
+
+        if(item.itemId==1){
+            navController.navigate(R.id.secondScreenFragment)
+        }
+
+        if(item.itemId==2){
+            navController.navigate(R.id.thirdScreenFragment)
+        }
+
+
+
+        return super.onOptionsItemSelected(item)
+    }
 
 }
