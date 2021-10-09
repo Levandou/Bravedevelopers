@@ -14,6 +14,7 @@ import com.example.bravedevelopers.R
 import com.example.bravedevelopers.domain.InformationAboutPokemon
 import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.internal.aggregatedroot.codegen._com_example_bravedevelopers_App
 import kotlinx.android.synthetic.main.fragment_second_screen.*
 
 
@@ -149,6 +150,7 @@ class SecondScreenFragment : Fragment() {
                 secondViewModel.favoritesList.observe(viewLifecycleOwner,{
                     for (i in it) {
                         if (list[randomPokemon].id ==i.id) {
+
                             ivIsFavorite.setImageResource(R.drawable.star1)
                             isFavoritePokemon=true
                         }
@@ -165,15 +167,26 @@ class SecondScreenFragment : Fragment() {
 
     fun onListener(view: View,ivIsFavorite: ImageView){
         Log.d("dullname", name.text.toString())
-        var nameCHeck:String= name.text.toString()
+        val nameCHeck:String= name.text.toString()
+        var listForFavorites:MutableList<InformationAboutPokemon> = mutableListOf()
+
 
         secondViewModel.favoritesList.observe(viewLifecycleOwner,{
             var isFavorite=false
-            for (i in it){
-                if(i.name.equals(nameCHeck)){
-                    ivIsFavorite.setImageResource(R.drawable.star2)
-                    secondViewModel.deleteFromFavorites(i)
-                    isFavorite=true
+
+        listForFavorites= it as MutableList<InformationAboutPokemon>
+           Log.d("228335", listForFavorites.toString())
+            Log.d("228336", it.toString())
+
+            if(listForFavorites.size>0) {
+                for (i in listForFavorites) {
+                    if (i.name.equals(nameCHeck)) {
+                        ivIsFavorite.setImageResource(R.drawable.star2)
+                        secondViewModel.deleteFromFavorites(i)
+                         listForFavorites.remove(i)
+                         isFavorite = true
+                        break
+                    }
                 }
             }
             if (!isFavorite){
@@ -183,12 +196,12 @@ class SecondScreenFragment : Fragment() {
                         if (i.name==nameCHeck){
                             i.isFavorite=true
                             secondViewModel.addToFavorites(i)
+                            listForFavorites.add(i)
                         }
                     }
                 })
             }
             isFavorite=false
-
         })
 
         secondViewModel.favoritesList.observe(viewLifecycleOwner,{
