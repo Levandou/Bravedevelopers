@@ -31,9 +31,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        var navController=Navigation.findNavController(this,R.id.search_container)
+
+        val navController= Navigation.findNavController(this,R.id.search_container)
         if(item.itemId==0){
-                    navController.navigate(R.id.firstScreenFragment)
+            navController.navigate(R.id.firstScreenFragment)
         }
 
         if(item.itemId==1){
@@ -43,8 +44,6 @@ class MainActivity : AppCompatActivity() {
         if(item.itemId==2){
             navController.navigate(R.id.thirdScreenFragment)
         }
-
-
 
         return super.onOptionsItemSelected(item)
     }
