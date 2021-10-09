@@ -19,7 +19,7 @@ class ThirdScreenAdapter(private val deleteFromFavorites: (InformationAboutPokem
     var pokemonsListFromDb= mutableListOf<InformationAboutPokemon>()
 
         set(value) { field = value
-            notifyDataSetChanged()
+           notifyDataSetChanged()
         }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ThirdViewHolder {
