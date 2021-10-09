@@ -24,7 +24,7 @@ private const val ARG_PARAM2 = "param2"
 @AndroidEntryPoint
 class SecondScreenFragment : Fragment() {
     var isFirst=true
-    val offsetAndOffsetPlusLimit: IntRange = 1..20
+    val offsetAndOffsetPlusLimit: IntRange = 0..19
     var list:MutableList<InformationAboutPokemon> = mutableListOf()
     private val secondViewModel: SecondScreenViewModel by viewModels()
 
@@ -135,7 +135,7 @@ class SecondScreenFragment : Fragment() {
 
             if(list.size==20 && !isFirst){
                 val randomPokemon=offsetAndOffsetPlusLimit.random()
-
+Log.d("hyuj", randomPokemon.toString())
                 name.setText(list[randomPokemon].name)
                 base_experience.setText("Base experience: "+list[randomPokemon].base_experience.toString())
                 height.setText("Height: "+list[randomPokemon].height.toString())
@@ -160,6 +160,15 @@ class SecondScreenFragment : Fragment() {
                 })
             }
             Log.d("tyuj", it.toString())
+
+        /*
+            if(list.size>40){
+                for(i in 1..20){
+                    list.removeLast()}
+                }*/
+
+
+
         })
     }
 
