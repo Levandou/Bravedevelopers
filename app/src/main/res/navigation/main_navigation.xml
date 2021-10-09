@@ -28,6 +28,7 @@
         <action
             android:id="@+id/action_secondScreenFragment_to_thirdScreenFragment"
             app:destination="@id/thirdScreenFragment" />
+
     </fragment>
     <fragment
         android:id="@+id/thirdScreenFragment"

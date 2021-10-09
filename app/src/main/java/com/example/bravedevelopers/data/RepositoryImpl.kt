@@ -32,10 +32,4 @@ class RepositoryImpl (private val pokemonsDao: PokemonsDao,private val apiServic
     override fun getPokemonsList(url: String?): Single<InformationAboutPokemon> {
         return apiService.getInformationAboutPokemon(url)
     }
-
-
-
-
-
-
 }

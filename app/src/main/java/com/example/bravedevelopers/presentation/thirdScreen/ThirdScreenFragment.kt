@@ -24,6 +24,7 @@ class ThirdScreenFragment : Fragment() {
     }
 
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -58,3 +59,4 @@ class ThirdScreenFragment : Fragment() {
             rvPokemonsList.adapter = adapter
         }
     }
+

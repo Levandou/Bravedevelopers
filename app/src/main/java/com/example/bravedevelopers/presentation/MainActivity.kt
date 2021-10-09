@@ -1,6 +1,7 @@
 package com.example.bravedevelopers.presentation
 
 
+
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -11,6 +12,8 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
+    
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -18,8 +21,6 @@ class MainActivity : AppCompatActivity() {
         setTheme(R.style.Theme_AppCompat_DayNight_DarkActionBar)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -31,7 +32,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-
         val navController= Navigation.findNavController(this,R.id.search_container)
         if(item.itemId==0){
             navController.navigate(R.id.firstScreenFragment)
@@ -47,4 +47,5 @@ class MainActivity : AppCompatActivity() {
 
         return super.onOptionsItemSelected(item)
     }
+
 }
